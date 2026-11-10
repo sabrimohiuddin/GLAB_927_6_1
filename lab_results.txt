@@ -1,0 +1,226 @@
+sabrimohiuddin:GLAB_927_6_1/ $ uv init                                                                  [17:32:52]
+Initialized project `glab-927-6-1`
+sabrimohiuddin:GLAB_927_6_1/ (main✗) $ uv add langchain-groq                                            [17:33:12]
+Using CPython 3.13.5
+Creating virtual environment at: .venv
+Resolved 37 packages in 1.41s
+      Built glab-927-6-1 @ file:///Users/sabrimohiuddin/Documents/CAX_255/Module_927/GLAB_927_6_1                  
+Prepared 36 packages in 329ms
+Installed 36 packages in 38ms
+ + annotated-types==0.8.0
+ + anyio==4.16.0
+ + certifi==2026.10.23
+ + charset-normalizer==3.5.2
+ + distro==1.9.0
+ + glab-927-6-1==0.1.0 (from file:///Users/sabrimohiuddin/Documents/CAX_255/Module_927/GLAB_927_6_1)
+ + groq==0.37.1
+ + h11==0.16.0
+ + httpcore==1.0.9
+ + httpcore2==2.16.0
+ + httpx==0.28.1
+ + httpx2==2.16.0
+ + idna==3.20
+ + jsonpatch==1.46
+ + jsonpointer==3.11
+ + langchain-core==1.7.7
+ + langchain-groq==1.1.3
+ + langchain-protocol==0.0.21
+ + langsmith==0.14.17
+ + orjson==3.13.0
+ + packaging==26.3
+ + pydantic==2.14.3
+ + pydantic-core==2.50.4
+ + pyyaml==6.0.3
+ + requests==2.34.2
+ + requests-toolbelt==1.0.0
+ + sniffio==1.3.1
+ + tenacity==9.2.1
+ + truststore==0.10.5
+ + typing-extensions==4.16.0
+ + typing-inspection==0.4.5
+ + urllib3==2.8.0
+ + uuid-utils==0.19.0
+ + websockets==17.4
+ + xxhash==4.1.0
+ + zstandard==0.25.0
+sabrimohiuddin:GLAB_927_6_1/ (main✗) $ uv run Sabri_Mohiuddin_GLAB_927_6_1.py                           [17:34:41]
+      Built glab-927-6-1 @ file:///Users/sabrimohiuddin/Documents/CAX_255/Module_927/GLAB_927_6_1                  
+Uninstalled 1 package in 1ms
+Installed 1 package in 3ms
+Enter your Groq API key (hidden): 
+TASK 2 — Basic FAQ chain
+
+Question: What are your business hours?
+Answer: Our business hours are Monday – Friday, 9 a.m. – 5 p.m. Eastern Time. We are closed on weekends.
+
+Question: What is your return policy?
+Answer: Our return policy is as follows:
+
+- Unused items can be returned within **30 days of delivery**.  
+- You must provide **proof of purchase**.  
+- To initiate a return, please **contact customer support**.
+
+TASK 3 — Advanced sequential workflow
+extracted_info: {'order_id': '12345'}
+lookup: {'order_id': '12345', 'status': 'Shipped', 'carrier': 'UPS', 'tracking_number': 'DEMO-UPS-12345', 'estimated_delivery': '2026-11-13'}
+order_details: **Order Details**
+
+- **Order ID:** 12345  
+- **Status:** Shipped  
+- **Carrier:** UPS  
+- **Tracking Number:** DEMO-UPS-12345  
+- **Estimated Delivery:** 2026-11-13
+response: Hello,
+
+Thank you for reaching out! I’ve checked the status of your order **#12345**.
+
+**Current status:** Shipped  
+**Carrier:** UPS  
+**Tracking number:** DEMO-UPS-12345  
+**Estimated delivery date:** **November 13, 2026**
+
+You can track your package directly using the link below:  
+[Track your shipment with UPS](https://www.ups.com/track?loc=en_US&tracknum=DEMO-UPS-12345)
+
+If you have any other questions or need further assistance, please let us know. We’re happy to help!
+
+Best regards,  
+Customer Support Team  
+[Your Company Name]
+
+TASK 4 — Baseline prompt evaluation
+
+Shipped order | keyword check=False | seconds=2.09
+Extracted info: {'order_id': '12345'}
+Order details: **Order Details**
+
+- **Order ID:** 12345  
+- **Status:** Shipped  
+- **Carrier:** UPS  
+- **Tracking Number:** DEMO-UPS-12345  
+- **Estimated Delivery:** 2026-11-13
+Customer response: Hello,
+
+Thank you for reaching out! I’ve looked up the details for your order **#12345**:
+
+- **Current status:** Shipped  
+- **Carrier:** UPS  
+- **Tracking number:** **DEMO-UPS-12345**  
+- **Estimated delivery date:** **November 13, 2026**
+
+You can track your package directly on the UPS website using the tracking number above, or simply click this link: <https://www.ups.com/track?loc=en_US&tracknum=DEMO-UPS-12345>.
+
+If you have any other questions or need further assistance, please let us know—we’re happy to help!
+
+Best regards,  
+[Your Company] Customer Support Team
+
+Processing order | keyword check=True | seconds=2.07
+Extracted info: {'order_id': '67890'}
+Order details: **Order Details**
+
+- **Order ID:** 67890  
+- **Status:** Processing  
+- **Carrier:** Not available  
+- **Tracking Number:** Not available  
+- **Estimated Delivery:** Not available  
+Customer response: Hi there,
+
+Thank you for reaching out about your order #67890.
+
+At the moment your order is still **Processing** and has not yet been shipped. Because it hasn’t left our warehouse, there isn’t a carrier, tracking number, or estimated delivery date to share right now.
+
+We’re working to get it out as quickly as possible. Once it ships, you’ll receive an email with the carrier information and a tracking number so you can follow its progress.
+
+If you’d like, I can set a reminder to let you know the moment the order ships, or answer any other questions you might have.
+
+Thanks for your patience, and please let me know if there’s anything else I can help with!
+
+Unknown order | keyword check=True | seconds=1.94
+Extracted info: {'order_id': '99999'}
+Order details: The lookup returned an error:
+
+**“Order not found. Please check the ID or contact support.”**
+Customer response: Hello,
+
+Thank you for reaching out. I’m sorry you’re having trouble locating order #99999. Our system isn’t returning any record for that number, which usually means one of the following:
+
+1. **A typo or missing digit** – double‑check the order number you received in the confirmation email.
+2. **The order was placed under a different account** – if you have multiple email addresses or accounts, the order might be linked to another one.
+3. **The order is very recent** – sometimes it can take a few minutes for a new order to appear in our tracking system.
+
+**What you can do next**
+
+- **Verify the order number** in the confirmation email (subject line usually reads “Your Order Confirmation – #XXXXX”).  
+- **Reply with the email address** you used when placing the order, or any other details (date of purchase, items ordered, payment method).  
+- If you placed the order as a guest, let us know the billing name and the last four digits of the card you used.
+
+Once we have a bit more information, we’ll be able to locate the order and provide you with the tracking details right away.
+
+If you prefer to speak with a live representative, you can also call our support line at **1‑800‑555‑0199** (Monday‑Friday, 8 am‑8 pm ET) or use the live‑chat button on our website.
+
+We apologize for any inconvenience and appreciate your patience. Let us know how you’d like to proceed, and we’ll get this sorted for you as quickly as possible.
+
+Best regards,  
+[Your Name]  
+Customer Support Team  
+[Company Name]
+
+Missing ID | keyword check=True | seconds=1.75
+Extracted info: {'order_id': None}
+Order details: I’m sorry—I wasn’t able to retrieve any order information because the lookup result indicates that a valid five‑digit order ID is required. Could you please provide the order ID you’d like to look up? Once I have that, I can retrieve the relevant details for you.
+Customer response: Hi there,
+
+I’m happy to help you track your order, but I’ll need a bit more information first. Could you please provide the **five‑digit order ID** associated with your purchase? Once I have that, I can look up the current status and give you an update right away.
+
+If you don’t have the order number handy, you can also share the email address you used for the purchase or any other details (e.g., date of purchase, items ordered) and I’ll do my best to locate it for you.
+
+Thank you!
+
+Ambiguous IDs | keyword check=False | seconds=1.93
+Extracted info: {'order_id': None}
+Order details: I’m sorry—I wasn’t able to retrieve any order information because the lookup result indicates that a valid five‑digit order ID is required. Could you please provide the order ID you’d like to look up? Once I have that, I can retrieve the relevant details for you.
+Customer response: Hello!
+
+Thank you for reaching out. I’m happy to help you track your orders. Our system can look up one order at a time, so please let me know which order number you’d like me to check first (e.g., **12345** or **67890**). Once I’ve retrieved the details for that order, we can move on to the next one.
+
+Looking forward to your reply!
+
+Baseline: 3/5 keyword checks passed, total elapsed time 9.76 seconds.
+
+TASK 4 — Improved prompt evaluation
+
+Shipped order | keyword check=False | seconds=1.46
+Extracted info: {'order_id': '12345'}
+Order details: {"order_id": "12345", "status": "Shipped", "carrier": "UPS", "tracking_number": "DEMO-UPS-12345", "estimated_delivery": "2026-11-13"}
+Customer response: Your order **#12345** has been **shipped** via **UPS**.
+
+- **Tracking number:** DEMO-UPS-12345  
+- **Estimated delivery:** around **November 13, 2026**  
+
+You can track the shipment on the UPS website using the provided tracking number. If you have any other questions, feel free to let us know!
+
+Processing order | keyword check=True | seconds=1.71
+Extracted info: {'order_id': '67890'}
+Order details: {"order_id": "67890", "status": "Processing", "carrier": null, "tracking_number": null, "estimated_delivery": null}
+Customer response: Your order #67890 is currently **Processing**. Because it hasn’t shipped yet, there is no carrier, tracking number, or estimated delivery date available at this time. Once the order ships, tracking information and an estimated delivery date will be provided. If you have any other questions, feel free to let us know.
+
+Unknown order | keyword check=True | seconds=1.40
+Extracted info: {'order_id': '99999'}
+Order details: {"error": "Order not found. Please check the ID or contact support."}
+Customer response: I’m sorry, but I couldn’t locate an order with the ID #99999. Could you please double‑check the number or contact our support team for assistance?
+
+Missing ID | keyword check=True | seconds=5.91
+Extracted info: {'order_id': None}
+Order details: {"error": "Please provide one five-digit order ID."}
+Customer response: Could you please provide the five‑digit order ID for your purchase? This will let me check its status for you.
+
+Ambiguous IDs | keyword check=False | seconds=7.47
+Extracted info: {'order_id': None}
+Order details: {"error": "Please provide one five-digit order ID."}
+Customer response: Could you please provide a single five‑digit order ID so I can look up the status for you?
+
+Improved: 3/5 keyword checks passed, total elapsed time 17.95 seconds.
+
+Review both versions for factual accuracy, clarity, missing-data handling, and unsupported claims. Network timing varies. Improved prompts add grounding and output rules, but results must be checked.
+sabrimohiuddin:GLAB_927_6_1/ (main✗) $                                                                  [17:38:23]
